@@ -86,4 +86,13 @@ public class UtenteService {
         }
         return false; // Utente non trovato
     }
+
+    // Metodo per verificare le credenziali dell'utente
+    public UtenteDTO checkCredentials(String username, String password) {
+        Utente utente = utenteRepository.findByUsername(username);
+        if (utente != null && utente.getPassword().equals(password)) {
+            return utenteMapper.utenteToUtenteDTO(utente);
+        }
+        throw new RuntimeException("Credenziali non valide");
+    }
 }

@@ -66,4 +66,18 @@ public class UtenteController {
         return isDeleted ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND); // Utente non trovato
     }
+
+    // Verifica credenziali utente
+    @PostMapping("/login")
+    public ResponseEntity<UtenteDTO> checkCredentials(@RequestBody UtenteDTO utenteDTO) {
+        try {
+            UtenteDTO utente = utenteService.checkCredentials(
+                utenteDTO.getUsername(), 
+                utenteDTO.getPassword()
+            );
+            return new ResponseEntity<>(utente, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
 }
