@@ -25,7 +25,7 @@ public class UtenteController {
     }
 
     // Recupero di tutti gli utenti
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<UtenteDTO>> getAllUtenti() {
         List<UtenteDTO> utenti = utenteService.getAllUtenti();
         return new ResponseEntity<>(utenti, HttpStatus.OK);
